@@ -1,0 +1,374 @@
+Git and Git Hub Learning:
+
+We had many version control softwares in market. They are as follows
+
+1. CVS
+2. PVCS
+3. Subversion(svn)
+4. Perforce
+5. Microsoft Visual Sourcesafe
+6. Mercurial
+7. Teamsite
+8. vault
+9. Bitkeeper - Used to manage the linux kernel before
+10. Git - Created by Linus author of linux 
+
+
+Initialization:
+
+	creating the empty repository for use
+	
+Clone:
+	Making a local full copy on your workstation
+	
+Checking out:
+	Locking a copy of one or more files for exclusive use
+
+Branching:
+	Allowing a set of files to be developed concurently and at different speeds for different reasons
+	
+Merging:
+	Taking different branches or sets of changes and integrating into one set or branch
+	
+
+Resolving:
+	Taking conflicting changes from multiple people on the same file and manually addressing
+	
+	
+Commit:
+
+	Taking changes from the local system and commiting them to the branch
+	
+Push/Pull:
+
+	Taking changes locally or remotely and merging into one or more branches
+	
+Installation:
+
+yum install git -y
+
+[root@node2 ~]# git --version
+git version 2.7.5
+
+
+Configuring User and email:
+
+~/.gitconfig
+
+
+Basic Configuration:
+
+/etc/gitconfig
+
+
+We have three things to be considered here
+
+--local :-> Deals with the local repository
+--global:-> Deals with the global repository
+--system :-> Deals with the system respository
+
+configure the editor for our git
+
+
+Git Basics :
+
+Empty Repositories:
+
+Create a directory and show the .git files
+
+Performing Operations:
+
+test.txt 
+
+Git Ignore:
+
+Cloning: Local Repositories:
+
+Normal copy operation
+
+
+Cloning: Remote Repositories:
+
+Local Clone from other server
+
+Branching, Merging and Tagging
+
+Tags:
+
+Tags helps us to save the state of the previous things, before it created.
+Master branch is the default branch which will gets initialized when you defaulty created the repository and initialize it. 
+
+Branches:
+
+Merging:
+
+Git Log:
+
+git log --pretty=oneline
+
+
+Working with Github :
+
+
+
+
+
+###########################   Git & GitHub Practice   #######################
+
+
+[root@terraform-git terraform]# yum install git
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                                             | 2.4 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package git.x86_64 0:2.23.3-1.amzn2.0.1 will be installed
+
+Installed:
+  git.x86_64 0:2.23.3-1.amzn2.0.1
+
+Dependency Installed:
+  emacs-filesystem.noarch 1:25.3-3.amzn2.0.1        git-core.x86_64 0:2.23.3-1.amzn2.0.1       git-core-doc.noarch 0:2.23.3-1.amzn2.0.1
+  libsecret.x86_64 0:0.18.5-2.amzn2.0.2             perl-Error.noarch 1:0.17020-2.amzn2        perl-Git.noarch 0:2.23.3-1.amzn2.0.1
+  perl-TermReadKey.x86_64 0:2.30-20.amzn2.0.2
+
+Complete!
+[root@terraform-git terraform]#
+
+
+[root@terraform-git terraform]# rpm -qa |grep git
+lm_sensors-libs-3.4.0-8.20160601gitf9185e5.amzn2.x86_64
+screen-4.1.0-0.25.20120314git3c2946.amzn2.x86_64
+crontabs-1.11-6.20121102git.amzn2.noarch
+git-core-doc-2.23.3-1.amzn2.0.1.noarch
+net-tools-2.0-0.22.20131004git.amzn2.0.2.x86_64
+python-pillow-2.0.0-20.gitd1c6db8.amzn2.0.1.x86_64
+git-2.23.3-1.amzn2.0.1.x86_64          =========--------------------------- ## This the git packege here installed
+git-core-2.23.3-1.amzn2.0.1.x86_64
+[root@terraform-git terraform]#
+
+[root@terraform-git terraform]# git --version
+git version 2.23.3
+[root@terraform-git terraform]#
+
+---------#### GIT Variables ####-----------
+
+[root@terraform-git terraform]# git config --list   ------------- Nothing showing since we did not difine any data
+[root@terraform-git terraform]#
+
+
+[root@terraform-git terraform]#
+[root@terraform-git terraform]# git config --global user.name "anilkum5319"   --------------- ## GitHub user name
+[root@terraform-git terraform]#
+[root@terraform-git terraform]# git config --global user.email kareadla@gmail.com  ---------  ## GitHub user name email
+[root@terraform-git terraform]#
+[root@terraform-git terraform]# cat ~/.gitconfig    ----------- ## What ever the configiration details will store under the home directory of ~/.gitconfig 
+[user]
+        name = anilkum5319
+        email = kareadla@gmail.com
+[root@terraform-git terraform]#
+
+
+[root@terraform-git terraform]# cat /etc/gitconfig    -------------- ## You dont have any system related configiration before you difine
+cat: /etc/gitconfig: No such file or directory 
+[root@terraform-git terraform]#
+[root@terraform-git terraform]#
+[root@terraform-git terraform]# git config --system system.editor "vim"     
+[root@terraform-git terraform]#
+[root@terraform-git terraform]# cat /etc/gitconfig   ----------- ## Will store the all sytem related data ( like vi , vim, home, ....etc) in this configiration file
+[system]
+        editor = vim
+[root@terraform-git terraform]#
+
+
+[root@terraform-git terraform]# git config --list    ----------------- ## We can view/list the all data/difine info
+system.editor=vim
+user.name=anilkum5319
+user.email=kareadla@gmail.com
+[root@terraform-git terraform]#
+
+
+[root@terraform-git terraform]# git init .          ====== ============ ========= ### If you want to Initialize any dir/ as repository, you should initialize under that dir/ 
+																					  In this case, i had created Terraform dir and under that dir/ initialized the git
+Initialized empty Git repository in /root/terraform/.git/
+[root@terraform-git terraform]#
+
+[root@terraform-git terraform]# ls -lthra
+total 16K
+drwxr-xr-x 3 root root   21 May 18 14:22 .terraform
+-rw-r--r-- 1 root root  452 May 19 17:30 main.tf
+-rw-r--r-- 1 root root 4.7K May 19 17:34 terraform.tfstate.backup
+-rw-r--r-- 1 root root  319 May 19 17:34 terraform.tfstate
+dr-xr-x--- 6 root root  248 May 20 07:20 ..
+drwxr-xr-x 7 root root  119 May 20 07:31 .git      ---------------------------------  ### As soon as you initialize git, you will get one dir/ with name	 .git 
+drwxr-xr-x 4 root root  108 May 20 07:31 .
+[root@terraform-git terraform]#
+
+[root@terraform-git terraform]# git status
+On branch master      -------------------------------------- ## This will indicate, where are you located , whether you are in Branch or Master, now you are in  Master branch
+
+No commits yet  ------------------- # There is no commits 
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .terraform/
+        main.tf
+        terraform.tfstate
+        terraform.tfstate.backup                    ------------------ ## There are some changes with these files which i dont know, so proceed to add them to track under the dir
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@terraform-git terraform]#
+
+[root@terraform-git terraform]# git add main.tf terraform.tfstate      ------------- ## There are two files added which i requried from above status, if you want to add entier/everthing content you can use git add * 
+[root@terraform-git terraform]#
+[root@terraform-git terraform]# git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   main.tf
+        new file:   terraform.tfstate
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .terraform/
+        terraform.tfstate.backup
+
+[root@terraform-git terraform]#
+
+[root@terraform-git terraform]# git commit -m "EC2 Creation .tf"     ----------------- ## git commit. The "commit" command is used to save your changes to the local repository.
+[master (root-commit) 86da4e8] EC2 Creation .tf
+ 2 files changed, 45 insertions(+)
+ create mode 100644 main.tf
+ create mode 100644 terraform.tfstate
+[root@terraform-git terraform]#
+
+
+[root@terraform-git terraform]# git log
+commit 86da4e8de4300db181a4f92b1dfbe4b2a6e737e7 (HEAD, master)
+Author: anilkum5319 <kareadla@gmail.com>
+Date:   Wed May 20 08:00:11 2020 +0000
+
+    EC2 Creation .tf
+[root@terraform-git terraform]#      ### The git checkout command is used to switch between branches in a repository. Be careful with your staged files and commits when switching between branches.
+
+
+[root@terraform-git terraform]#  git checkout 86da4e8de4300db181a4f92b1dfbe4b2a6e737e7   
+Note: switching to '86da4e8de4300db181a4f92b1dfbe4b2a6e737e7'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 86da4e8 EC2 Creation .tf
+[root@terraform-git terraform]#
+[root@terraform-git terraform]#
+
+
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# git add .
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# ls -ltrh
+total 12K
+-rw-r--r-- 1 root root 452 May 19 17:30 main.tf
+-rw-r--r-- 1 root root 319 May 19 17:34 terraform.tfstate
+-rw-r--r-- 1 root root  25 May 20 11:45 README.md
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   terraform.tfstate
+
+[root@terraform-git Terraform]# git commit -m "tfstate" 
+[master 78572b9] tfstate
+ 1 file changed, 16 insertions(+)
+ create mode 100644 terraform.tfstate
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# git pull  https://github.com/anilkum5319/Terraform.git
+From https://github.com/anilkum5319/Terraform
+ * branch            HEAD       -> FETCH_HEAD
+Already up to date.
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# git push  https://github.com/anilkum5319/Terraform.git
+Username for 'https://github.com': anilkum5319
+Password for 'https://anilkum5319@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 474 bytes | 474.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/anilkum5319/Terraform.git
+   c2058e0..78572b9  master -> master
+[root@terraform-git Terraform]#
+
+[root@terraform-git Terraform]#  git branch
+  anil-trfm
+* master
+  –no-merged
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# git branch -D –no-merged     ------------## To delete the branch 
+Deleted branch –no-merged (was 51f02a8).
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]#
+[root@terraform-git Terraform]# git branch
+  anil-trfm
+* master    
+[root@terraform-git Terraform]#
+
+
+[root@terraform-git Terraform]# git switch master    ----------------------------------------------- ### To switch the branch from one to other
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+[root@terraform-git Terraform]#
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
